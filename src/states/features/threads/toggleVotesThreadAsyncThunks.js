@@ -10,6 +10,7 @@ export const asyncToggleUpVoteThread = createAsyncThunk(
     const currThread = getState().threads.threads;
     const threadFound = currThread.find((thread) => thread.id === threadId);
     // check if user already liked the post. if does neutralize the thread upcvotes
+
     if (threadFound.upVotesBy.includes(userId)) {
       const updatedUpVotesBy = threadFound.upVotesBy.filter((user) => user !== userId);
       const updatedThread = {

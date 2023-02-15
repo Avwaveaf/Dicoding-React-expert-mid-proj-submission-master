@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import parseHTML from 'html-react-parser';
 import { useDispatch } from 'react-redux';
+import { BiDownvote, BiUpvote } from 'react-icons/bi';
 import formatDate from '../../services/formatDate';
 import CommentsList from '../commentsList/CommentsList.component';
 import { asyncCreateCommentThunk } from '../../states/features/threads/threadSlice';
-import { asyncToggleDownVoteThread, asyncToggleUpVoteThread } from '../../states/features/threads/threadsAsyncThunks';
+import { asyncToggleDownVoteThread, asyncToggleUpVoteThread } from '../../states/features/threads/toggleVotesThreadAsyncThunks';
 
 function ThreadItem({ data = {} }) {
   const {
@@ -36,16 +37,18 @@ function ThreadItem({ data = {} }) {
   };
   return (
     <Card>
-      <span>
-        upvotes:
-        {upVotesBy.length }
-      </span>
-      <button onClick={handleUpVotesThread} type="button">upVotes</button>
-      <span>
-        downVotes:
-        {downVotesBy.length }
-      </span>
-      <button onClick={handleDownVotesThread} type="button">downVotes</button>
+      <div className=" d-flex gap-3 flex-column align-items-center justify-content-center">
+
+        <button onClick={handleUpVotesThread} type="button" className="d-flex align-items-center">
+          <BiUpvote size={30} />
+          {upVotesBy.length }
+        </button>
+        <button onClick={handleDownVotesThread} type="button" className="d-flex align-items-center">
+          <BiDownvote size={30} />
+          {downVotesBy.length }
+        </button>
+      </div>
+
       <Card.Header>
         {' '}
         <div>

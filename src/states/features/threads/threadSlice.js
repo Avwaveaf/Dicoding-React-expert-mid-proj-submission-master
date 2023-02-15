@@ -78,6 +78,12 @@ const threadSlice = createSlice({
       const index = state.threads.findIndex((thread) => thread.id === payload.id);
       state.threads[index] = payload;
     },
+    UPDATE_COMMENT(state, { payload }) {
+      const index = state.threads.findIndex((thread) => thread.id === payload.threadId);
+      const commentIndex = state.threads[index].comments
+        .findIndex((comment) => comment.id === payload.comment.id);
+      state.threads[index].comments[commentIndex] = payload.comment;
+    },
   },
   extraReducers: (builder) => builder
     .addCase(asyncGetAllPost.pending, (state) => {
@@ -153,6 +159,6 @@ const threadSlice = createSlice({
 
 });
 
-export const { UPDATE_THREAD } = threadSlice.actions;
+export const { UPDATE_THREAD, UPDATE_COMMENT } = threadSlice.actions;
 
 export default threadSlice.reducer;
