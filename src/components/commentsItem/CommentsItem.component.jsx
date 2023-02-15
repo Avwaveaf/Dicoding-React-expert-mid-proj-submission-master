@@ -1,22 +1,60 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import parseHTML from 'html-react-parser';
 import Card from 'react-bootstrap/Card';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import formatDate from '../../utils/formatDate';
 import { asyncToggleDownVoteComment, asyncToggleUpVoteComment } from '../../states/features/threads/toggleVotesCommentAsyncThunks';
 import VotesButton from '../votesButton/VotesButton.component';
 
 function CommentsItem({ data, threadId }) {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const isUpVoted = useMemo(() => {
+    if (user) {
+      return data.upVotesBy.includes(user.id);
+    }
+    return false;
+  }, [data.upVotesBy, user]);
+
+  const isDownVoted = useMemo(() => {
+    if (user) {
+      return data.downVotesBy.includes(user.id);
+    }
+    return false;
+  }, [data.downVotesBy, user]);
+
+  const [voted, setVoted] = useState(() => {
+    if (isUpVoted) {
+      return 'up';
+    }
+    if (isDownVoted) {
+      return 'down';
+    }
+    return '';
+  });
+
   const toggleUpVotesCommentHandler = async () => {
     const commentId = data.id;
-    await dispatch(asyncToggleUpVoteComment({ threadId, commentId }));
+    if (voted === 'up') {
+      setVoted('');
+      await dispatch(asyncToggleUpVoteComment({ threadId, commentId }));
+    } else {
+      setVoted('up');
+      await dispatch(asyncToggleUpVoteComment({ threadId, commentId }));
+    }
   };
   const toggleDownVotesCommentHandler = async () => {
     const commentId = data.id;
-    await dispatch(asyncToggleDownVoteComment({ threadId, commentId }));
+    if (voted === 'down') {
+      setVoted('');
+      await dispatch(asyncToggleDownVoteComment({ threadId, commentId }));
+    } else {
+      setVoted('down');
+      await dispatch(asyncToggleDownVoteComment({ threadId, commentId }));
+    }
   };
   return (
     <Card>
@@ -27,6 +65,7 @@ function CommentsItem({ data, threadId }) {
             downVotesCount={data.downVotesBy.length}
             toggleUpVoteshandler={toggleUpVotesCommentHandler}
             toggleDownVotesHandler={toggleDownVotesCommentHandler}
+            voted={voted}
           />
 
           <div className="d-flex gap-1 w-100 ">

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import parseHTML from 'html-react-parser';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import formatDate from '../../utils/formatDate';
 import CommentsList from '../commentsList/CommentsList.component';
 import { asyncCreateCommentThunk } from '../../states/features/threads/threadSlice';
@@ -23,33 +23,72 @@ function ThreadItem({ data = {} }) {
     downVotesBy,
   } = data;
   const [comment, setComment] = useState({ content: '' });
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const addCommentHandler = async () => {
     await dispatch(asyncCreateCommentThunk({ comment, id }));
     setComment({ content: '' });
   };
 
+  const isUpVoted = useMemo(() => {
+    if (user) {
+      return upVotesBy.includes(user.id);
+    }
+    return false;
+  }, [upVotesBy, user]);
+
+  const isDownVoted = useMemo(() => {
+    if (user) {
+      return downVotesBy.includes(user.id);
+    }
+    return false;
+  }, [downVotesBy, user]);
+
+  const [voted, setVoted] = useState(() => {
+    if (isUpVoted) {
+      return 'up';
+    }
+    if (isDownVoted) {
+      return 'down';
+    }
+    return '';
+  });
+
   const handleUpVotesThread = async () => {
-    await dispatch(asyncToggleUpVoteThread(id));
+    if (voted === 'up') {
+      setVoted('');
+      await dispatch(asyncToggleUpVoteThread(id));
+    } else {
+      setVoted('up');
+      await dispatch(asyncToggleUpVoteThread(id));
+    }
   };
   const handleDownVotesThread = async () => {
-    await dispatch(asyncToggleDownVoteThread(id));
+    if (voted === 'down') {
+      setVoted('');
+      await dispatch(asyncToggleDownVoteThread(id));
+    } else {
+      setVoted('down');
+      await dispatch(asyncToggleDownVoteThread(id));
+    }
   };
   return (
     <Card>
 
-      <VotesButton
-        upVotesCount={upVotesBy.length}
-        downVotesCount={downVotesBy.length}
-        toggleUpVoteshandler={handleUpVotesThread}
-        toggleDownVotesHandler={handleDownVotesThread}
-      />
-
       <Card.Header>
         {' '}
-        <div>
-          <img src={owner.avatar} className="rounded-circle" alt="owner" />
-          <span>{owner.name }</span>
+        <div className="d-flex px-3 justify-content-between">
+          <div className="d-flex gap-3 align-items-center">
+            <img src={owner.avatar} loading="lazy" className="rounded-circle" alt="owner" />
+            <span>{owner.name }</span>
+          </div>
+          <VotesButton
+            upVotesCount={upVotesBy.length}
+            downVotesCount={downVotesBy.length}
+            toggleUpVoteshandler={handleUpVotesThread}
+            toggleDownVotesHandler={handleDownVotesThread}
+            voted={voted}
+          />
         </div>
 
       </Card.Header>

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Marquee from 'react-fast-marquee';
 import CreateThreadModal from '../../components/createThreadModal/CreateThreadModal.component';
 import LeaderboardsList from '../../components/leaderboardsList/LeaderboardsList.component';
 import ThreadList from '../../components/ThreadList/ThreadList.component';
