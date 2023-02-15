@@ -5,7 +5,7 @@ import parseHTML from 'html-react-parser';
 import Card from 'react-bootstrap/Card';
 import { BiUpvote, BiDownvote } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
-import formatDate from '../../services/formatDate';
+import formatDate from '../../utils/formatDate';
 import { asyncToggleDownVoteComment, asyncToggleUpVoteComment } from '../../states/features/threads/toggleVotesCommentAsyncThunks';
 
 function CommentsItem({ data, threadId }) {
