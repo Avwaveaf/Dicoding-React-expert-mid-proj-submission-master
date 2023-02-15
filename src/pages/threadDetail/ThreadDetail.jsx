@@ -20,9 +20,7 @@ function ThreadDetail() {
     };
     getThreadDetail();
   }, [dispatch, threadId]);
-  if (isLoading || !thread) {
-    return <p>Loading...</p>;
-  }
+
   if (!isLoading && thread) {
     return (
       <div className="container-md flex justify-content-center align-items-center">

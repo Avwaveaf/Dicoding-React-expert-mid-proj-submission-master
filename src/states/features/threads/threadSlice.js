@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
-
 import {
   CreateComment,
   CreateThread,
@@ -15,11 +14,12 @@ const initialState = {
   isLoading: false,
   message: '',
   isError: false,
+  categories: [],
 };
 
 export const asyncGetAllPost = createAsyncThunk(
   'thread/getAllPost',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const allPostsResponse = await GetAllPost();
       const allPosts = allPostsResponse.data.threads;
@@ -84,6 +84,7 @@ const threadSlice = createSlice({
         .findIndex((comment) => comment.id === payload.comment.id);
       state.threads[index].comments[commentIndex] = payload.comment;
     },
+
   },
   extraReducers: (builder) => builder
     .addCase(asyncGetAllPost.pending, (state) => {

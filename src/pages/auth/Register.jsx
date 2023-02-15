@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../../components/authForm/AuthForm.component';
 import useFetchUserData from '../../customHooks/useFetchUserData';
@@ -13,8 +13,7 @@ const initialData = {
 };
 
 function Register() {
-  useFetchUserData('/');
-  const { isLoading } = useSelector((state) => state.auth);
+  useFetchUserData('/threads');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const registerHandler = async (e, formData) => {
@@ -30,17 +29,14 @@ function Register() {
   };
 
   return (
-    <>
-      {isLoading && <h1>Loading...</h1>}
-      <div className="container-md  d-flex  flex-column justify-content-center align-items-center py-auto">
-        <AuthForm onSubmitHandler={registerHandler} initialData={initialData} />
+    <div className="container-md  d-flex  flex-column justify-content-center align-items-center py-auto">
+      <AuthForm onSubmitHandler={registerHandler} initialData={initialData} />
 
-        <Link to="/login">
-          Already have an account?
-        </Link>
+      <Link to="/login">
+        Already have an account?
+      </Link>
 
-      </div>
-    </>
+    </div>
   );
 }
 

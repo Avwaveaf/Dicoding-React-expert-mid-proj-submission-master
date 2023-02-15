@@ -28,7 +28,7 @@ function CustomNavbar() {
   return (
     <Navbar fixed="top" className="py-3" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">TalksDeed</Navbar.Brand>
+        <Navbar.Brand href="/">TalksDeed</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

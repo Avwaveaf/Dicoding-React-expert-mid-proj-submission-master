@@ -32,11 +32,11 @@ export const asyncRegisterUserThunk = createAsyncThunk(
 );
 export const asyncLoginUserThunk = createAsyncThunk(
   'auth/login',
-  async (formData, thunkAPI) => {
+  async (formData, { rejectWithValue, dispatch }) => {
     try {
       return await LoginUserHandler(formData);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message || error.message);
+      return rejectWithValue(error.response.data.message || error.message);
     }
   },
 );

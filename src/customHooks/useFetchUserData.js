@@ -12,6 +12,8 @@ const useFetchUserData = (path) => {
       if (user) {
         toast.success(`Welcome back ${user.name}`);
         navigate(path);
+      } else if (!user && token) {
+        navigate(path);
       }
     };
     fetchUserData();
