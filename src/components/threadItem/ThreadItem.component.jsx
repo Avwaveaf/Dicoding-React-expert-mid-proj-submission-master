@@ -26,6 +26,7 @@ const tooltip = (
 );
 const contentTooltip = (
   <Tooltip id="tooltip">
+    Click to&nbsp;
     <strong>See details</strong>
   </Tooltip>
 );
@@ -96,7 +97,7 @@ function ThreadItem({ data = {} }) {
 
   const truncatedBody = body.length > 200 ? `${body.slice(0, 200)}...` : body;
   return (
-    <Card className="bg-light">
+    <Card>
       <CustomModal
         show={modalShow}
         onHide={() => setModalShow(false)}
@@ -191,7 +192,7 @@ function ThreadItem({ data = {} }) {
       </Card.Header>
       <Card.Body style={{ boxShadow: 'inset 0px -100px 100px -100px rgba(0,0,0,0.75)' }}>
         <Card.Title>{title}</Card.Title>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex p-3 justify-content-between">
           <span className="text-muted" style={{ fontSize: '12px' }}>{formatDate(createdAt)}</span>
           <Badge bg="dark" style={{ width: 'fit-content' }}>
             #
@@ -214,7 +215,7 @@ function ThreadItem({ data = {} }) {
           </div>
         </OverlayTrigger>
         <InputGroup>
-          <InputGroup.Text className="d-flex gap-2 px-4" id="basic-addon2">
+          <InputGroup.Text className="d-flex gap-2 px-4 rounded-0 text-secondary" id="basic-addon2">
             <img src={user?.avatar} width={25} height={25} className="rounded-circle" alt="user" />
             {user?.name }
           </InputGroup.Text>
@@ -224,6 +225,7 @@ function ThreadItem({ data = {} }) {
               placeholder="Add comment"
               type="text"
               name="content"
+              className="rounded-0"
               value={comment.content}
               onChange={(e) => setComment({ [e.target.name]: e.target.value })}
               onKeyDown={(e) => {

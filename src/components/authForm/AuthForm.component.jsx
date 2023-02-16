@@ -15,7 +15,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
   return (
     <Form onSubmit={(e) => onSubmitHandler(e, formData, setFormData)}>
       <Form.Group className={`mb-3 ${login && 'd-none'}`}>
-        <Form.Label>Username</Form.Label>
+        <Form.Label className="text-light">Username</Form.Label>
         <Form.Control
           type="text"
           name="name"
@@ -26,7 +26,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label className="text-light">Email address</Form.Label>
         <Form.Control
           type="email"
           name="email"
@@ -34,14 +34,14 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
           onChange={(e) => onInputChangeHandler(e)}
           placeholder="Your Email Address"
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-light">
           We&apos;ll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <div className="d-flex align-items-center">
+        <Form.Label className="text-light">Password</Form.Label>
+        <div className="d-flex gap-2 align-items-center">
           <Form.Control
             type={pwdShow ? 'text' : 'password'}
             name="password"
@@ -51,9 +51,11 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
           />
           <button
             style={{
-              background: 'transparent',
+              background: 'white',
               outline: 'none',
               border: 'none',
+              borderRadius: '50px',
+
             }}
             type="button"
             onClick={() => setPwdShow(!pwdShow)}
@@ -65,7 +67,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
       </Form.Group>
       <Form.Group className={`mb-3 ${login && 'd-none'}`} controlId="formBasicPassword2">
-        <Form.Label>Confirm Password</Form.Label>
+        <Form.Label className="text-light">Confirm Password</Form.Label>
         <Form.Control
           type={pwdShow ? 'text' : 'password'}
           name="confirmPassword"

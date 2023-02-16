@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 import AuthForm from '../../components/authForm/AuthForm.component';
 import AuthLayout from '../../components/authLayout/AuthLayout.component';
 import useFetchUserData from '../../customHooks/useFetchUserData';
@@ -31,9 +32,19 @@ function Register() {
 
   return (
     <AuthLayout>
+      <h1 className="d-flex gap-2 text-light">
+
+        <Typewriter
+          options={{
+            strings: ['Welcome to TalksDeed!', 'Register to continue... '],
+            autoStart: true,
+            loop: true,
+          }}
+        />
+      </h1>
       <AuthForm onSubmitHandler={registerHandler} initialData={initialData} />
 
-      <Link to="/login">
+      <Link to="/login" className="text-light">
         Already have an account?
       </Link>
 

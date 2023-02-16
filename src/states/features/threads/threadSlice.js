@@ -123,14 +123,15 @@ const threadSlice = createSlice({
     })
     .addCase(asyncGetThreadDetailThunk.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      state.isError = false;
       state.message = payload.message;
-
       state.thread = payload.data.detailThread;
       toast.success(payload.message);
     })
     .addCase(asyncGetThreadDetailThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.message = payload;
+      state.isError = true;
       toast.error(payload);
     })
     .addCase(asyncCreateCommentThunk.pending, (state) => {

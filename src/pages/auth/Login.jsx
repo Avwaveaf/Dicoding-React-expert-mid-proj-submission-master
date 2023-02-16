@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
@@ -34,22 +35,23 @@ function Login() {
 
   return (
     <AuthLayout>
-      <h1>
+      <h2 className="d-flex gap-2 text-light">
+
         <Typewriter
           options={{
-            strings: ['Welcome to TalksDeed!', 'Please Login to continue... '],
+            strings: ['Welcome to TalksDeed!', 'Login to continue '],
             autoStart: true,
             loop: true,
           }}
         />
-      </h1>
+      </h2>
 
       <AuthForm
         onSubmitHandler={loginHandler}
         initialData={initialData}
         login
       />
-      <Link to="/register">
+      <Link to="/register" className="text-light">
         Don&apos;t have an account?
       </Link>
     </AuthLayout>

@@ -5,9 +5,9 @@ import CommentsItem from '../commentsItem/CommentsItem.component';
 
 function CommentsList({ comments = [], threadId }) {
   return (
-    <Accordion>
+    <Accordion id="comment-accordion">
       <Accordion.Item eventKey="0">
-        <Accordion.Header>
+        <Accordion.Header className="text-secondary">
           { `Comments (${comments.length})`}
         </Accordion.Header>
         <Accordion.Body>

@@ -12,7 +12,7 @@ function ThreadDetail() {
   useRedirectLoggedOut('/login');
   const { threadId } = useParams();
   const dispatch = useDispatch();
-  const { thread, isLoading } = useSelector((state) => state.threads);
+  const { thread, isLoading, isError } = useSelector((state) => state.threads);
 
   useEffect(() => {
     const getThreadDetail = async () => {
@@ -21,23 +21,27 @@ function ThreadDetail() {
     getThreadDetail();
   }, [dispatch, threadId]);
 
+  if (isError) {
+    return <p>Thread not found</p>;
+  }
+
   if (!isLoading && thread) {
     return (
       <div className="container-md flex justify-content-center align-items-center">
-        <h1>{thread.title }</h1>
-        <h4>{ thread.category}</h4>
+        <h1>{thread.title}</h1>
+        <h4>{thread.category}</h4>
         <span>
           created By:
           {' '}
-          {thread.owner.name }
+          {thread.owner.name}
         </span>
         <span>
           created at:
           {' '}
-          { formatDate(thread.createdAt)}
+          {formatDate(thread.createdAt)}
         </span>
         <div className="p-3">
-          { parseHTML(DOMPurify.sanitize(thread.body))}
+          {parseHTML(DOMPurify.sanitize(thread.body))}
         </div>
         <div />
         <hr />

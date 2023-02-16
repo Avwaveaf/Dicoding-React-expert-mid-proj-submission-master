@@ -71,10 +71,10 @@ function CommentsItem({ data, threadId }) {
           <div className="d-flex gap-1 w-100 ">
             <img src={data.owner.avatar} width={30} height={30} className="rounded-circle" alt="owner" />
             <div className="d-flex flex-column w-100">
-              <span>{ data.owner.name}</span>
-              <span className="text-secondary">{formatDate(data.createdAt)}</span>
+              <span className="text-dark">{ data.owner.name}</span>
+              <span className="text-dark">{formatDate(data.createdAt)}</span>
               <hr />
-              <section className="mt-2">
+              <section className="mt-2 text-dark">
 
                 {parseHTML(DOMPurify.sanitize(data.content))}
               </section>
