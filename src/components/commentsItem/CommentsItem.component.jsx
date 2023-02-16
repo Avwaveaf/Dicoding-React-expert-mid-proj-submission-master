@@ -83,7 +83,7 @@ function CommentsItem({ data, threadId }) {
 
         </div>
       </Card.Body>
-      <Card.Footer />
+
     </Card>
 
   );

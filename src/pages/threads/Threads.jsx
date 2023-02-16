@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import CreateThreadModal from '../../components/createThreadModal/CreateThreadModal.component';
 import LeaderboardsList from '../../components/leaderboardsList/LeaderboardsList.component';
 import ThreadList from '../../components/ThreadList/ThreadList.component';
@@ -55,45 +58,45 @@ function Threads() {
     : threads;
 
   return (
-    <>
+    <Row className="container-md d-flex flex-column flex-md-row">
+      <Col>
+        <LeaderboardsList leaderboards={leaderboards} />
+      </Col>
 
-      <div className="px-5 border rounded h-100 ">
-        <h1>Categories</h1>
-
-        {categories?.map((category) => (
-
-          <button
-            key={category}
-            type="button"
-            onClick={() => handleCategoryClick(category)}
-            style={{
-              background: selectedCategory === category ? 'rgb(33,37,41)' : 'white',
-              color: selectedCategory === category ? 'white' : 'black',
-              border: '1px solid black',
-              borderRadius: '5px',
-              padding: '10px',
-              margin: '5px',
-            }}
-          >
-            {category}
-          </button>
-
-        )) }
-
-      </div>
-      <div className="container-md   d-lg-flex ">
-
-        <div>
-          <ThreadList threads={filteredThreads} />
-          {
+      <Col md={6}>
+        <ThreadList threads={filteredThreads} />
+        {
         isLoggedIn && <CreateThreadModal />
       }
 
-        </div>
+      </Col>
+      <Col>
+        <div className="px-5 border rounded h-100 ">
+          <h1>Categories</h1>
 
-        <LeaderboardsList leaderboards={leaderboards} />
-      </div>
-    </>
+          {categories?.map((category) => (
+
+            <button
+              key={category}
+              type="button"
+              onClick={() => handleCategoryClick(category)}
+              style={{
+                background: selectedCategory === category ? 'rgb(33,37,41)' : 'white',
+                color: selectedCategory === category ? 'white' : 'black',
+                border: '1px solid black',
+                borderRadius: '5px',
+                padding: '10px',
+                margin: '5px',
+              }}
+            >
+              {category}
+            </button>
+
+          )) }
+
+        </div>
+      </Col>
+    </Row>
   );
 }
 

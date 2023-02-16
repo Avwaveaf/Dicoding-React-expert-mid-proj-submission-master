@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { BiDownvote, BiUpvote } from 'react-icons/bi';
+import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 
 function VotesButton({
   toggleUpVoteshandler, toggleDownVotesHandler, upVotesCount, downVotesCount, voted = null,
@@ -9,11 +9,11 @@ function VotesButton({
     <div className=" d-flex gap-2 flex-column  align-items-center justify-content-center">
 
       <button type="button" onClick={toggleUpVoteshandler} className="d-flex align-items-center border-0 bg-transparent rounded-circle">
-        <BiUpvote size={20} color={voted === 'up' && 'red'} />
+        <TiArrowUpThick size={20} color={voted === 'up' ? '#00c853' : '#c9c9c9'} />
         {upVotesCount }
       </button>
       <button type="button" onClick={toggleDownVotesHandler} className="d-flex align-items-center border-0 bg-transparent rounded-circle">
-        <BiDownvote size={20} color={voted === 'down' && 'red'} />
+        <TiArrowDownThick size={20} color={voted === 'down' ? '#DC3545' : '#c9c9c9'} />
         {downVotesCount }
       </button>
     </div>

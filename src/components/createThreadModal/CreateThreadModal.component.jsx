@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { asyncCreateThreadThunk, asyncGetAllPost } from '../../states/features/threads/threadSlice';
+import { BiMessageRoundedAdd } from 'react-icons/bi';
+import Button from 'react-bootstrap/Button';
+import { asyncCreateThreadThunk } from '../../states/features/threads/threadSlice';
 import ThreadForm from '../threadForm/ThreadForm.component';
 
 const initialData = {
@@ -32,7 +34,25 @@ function CreateThreadModal() {
 
   return (
     <div>
-      <button type="button" onClick={() => setModalShow(true)}>+</button>
+      <Button
+        style={{
+          position: 'fixed',
+          bottom: '50px',
+          right: '50px',
+          zIndex: '999',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '15px',
+          borderRadius: '15px',
+          gap: '10px',
+        }}
+        variant="dark"
+        onClick={() => setModalShow(true)}
+      >
+        <BiMessageRoundedAdd size={30} />
+        Add Threads
+      </Button>
       <ThreadForm
         initialData={initialData}
         onSubmitHandler={createThreadSubmitHandler}
