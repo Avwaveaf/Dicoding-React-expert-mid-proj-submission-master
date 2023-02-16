@@ -15,3 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.accordion-button:not(.collapsed) {
+  color: black !important;
+  background-color: #f0f1f2 !important;
+}

@@ -8,7 +8,7 @@ function LeaderboardsList({ leaderboards }) {
     <Accordion defaultActiveKey={['0']} alwaysOpen>
       <Accordion.Item eventKey="0">
         <Accordion.Header>Leaderboards</Accordion.Header>
-        <Accordion.Body>
+        <Accordion.Body style={{ background: '#F8F9FA' }}>
           {
               leaderboards.map((item) => (
                 <div className="d-flex justify-content-between  p-2" key={item.user.id}>

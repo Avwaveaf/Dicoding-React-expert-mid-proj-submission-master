@@ -70,9 +70,9 @@ function Threads() {
       }
 
       </Col>
-      <Col>
+      <Col className="d-flex flex-column">
+        <p className="fs-3">Categories</p>
         <div className="px-5 border rounded h-100 ">
-          <h1>Categories</h1>
 
           {categories?.map((category) => (
 

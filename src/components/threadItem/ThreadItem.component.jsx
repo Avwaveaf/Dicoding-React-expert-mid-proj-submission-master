@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import parseHTML from 'html-react-parser';
 import { useDispatch, useSelector } from 'react-redux';
+import Badge from 'react-bootstrap/Badge';
 import formatDate from '../../utils/formatDate';
 import CommentsList from '../commentsList/CommentsList.component';
 import { asyncCreateCommentThunk } from '../../states/features/threads/threadSlice';
@@ -26,6 +27,7 @@ function ThreadItem({ data = {} }) {
     id,
     title,
     body,
+    category,
     createdAt,
     owner,
     comments,
@@ -88,8 +90,8 @@ function ThreadItem({ data = {} }) {
       <Card.Header>
 
         <div className="d-flex px-3 justify-content-between">
-          <div className="d-flex gap-3 align-items-center">
-            <img src={owner.avatar} loading="lazy" className="rounded-circle" alt="owner" />
+          <div className="d-flex gap-2 align-items-center">
+            <img src={owner.avatar} loading="lazy" width={40} height={40} className="rounded-circle" alt="owner" />
             <span>{owner.name }</span>
           </div>
           <VotesButton
@@ -104,17 +106,23 @@ function ThreadItem({ data = {} }) {
       </Card.Header>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <span>{formatDate(createdAt) }</span>
+        <div className="d-flex justify-content-between">
+          <span className="text-muted" style={{ fontSize: '12px' }}>{formatDate(createdAt)}</span>
+          <Badge bg="dark" style={{ width: 'fit-content' }}>
+            #
+            {category}
+          </Badge>
+        </div>
         <div className="p-3">
           { parseHTML(DOMPurify.sanitize(body))}
         </div>
         <Link to={`/threads/${id}`}>see details</Link>
       </Card.Body>
 
-      <Card.Footer className="p-0">
+      <Card.Footer className="p-2 border-0">
 
-        <InputGroup className="p-1">
-          <InputGroup.Text className="d-flex gap-2" id="basic-addon2">
+        <InputGroup>
+          <InputGroup.Text className="d-flex gap-2 px-4" id="basic-addon2">
             <img src={user?.avatar} width={25} height={25} className="rounded-circle" alt="user" />
             {user?.name }
           </InputGroup.Text>
@@ -123,6 +131,8 @@ function ThreadItem({ data = {} }) {
             <Form.Control
               placeholder="Add comment"
               type="text"
+              style={{ border: 'none' }}
+              className="rounded-0"
               name="content"
               value={comment.content}
               onChange={(e) => setComment({ [e.target.name]: e.target.value })}
