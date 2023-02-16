@@ -1,14 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
-import {
-  Card, Form, InputGroup, OverlayTrigger, Tooltip,
-} from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import parseHTML from 'html-react-parser';
 import { useDispatch, useSelector } from 'react-redux';
 import Badge from 'react-bootstrap/Badge';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import formatDate from '../../utils/formatDate';
 import CommentsList from '../commentsList/CommentsList.component';
 import { asyncCreateCommentThunk } from '../../states/features/threads/threadSlice';
@@ -192,7 +193,7 @@ function ThreadItem({ data = {} }) {
       </Card.Header>
       <Card.Body style={{ boxShadow: 'inset 0px -100px 100px -100px rgba(0,0,0,0.75)' }}>
         <Card.Title>{title}</Card.Title>
-        <div className="d-flex p-3 justify-content-between">
+        <div className="d-flex px-3 justify-content-between">
           <span className="text-muted" style={{ fontSize: '12px' }}>{formatDate(createdAt)}</span>
           <Badge bg="dark" style={{ width: 'fit-content' }}>
             #
@@ -205,9 +206,10 @@ function ThreadItem({ data = {} }) {
           <div
             className="p-3"
             style={{
-              height: '150px',
+              height: 'fit-content',
               overflow: 'hidden',
               cursor: 'pointer',
+              marginBottom: '10px',
             }}
             onClick={() => setModalShow(true)}
           >
@@ -215,7 +217,7 @@ function ThreadItem({ data = {} }) {
           </div>
         </OverlayTrigger>
         <InputGroup>
-          <InputGroup.Text className="d-flex gap-2 px-4 rounded-0 text-secondary" id="basic-addon2">
+          <InputGroup.Text className="d-flex gap-2 px-4 rounded-md text-secondary" id="basic-addon2">
             <img src={user?.avatar} width={25} height={25} className="rounded-circle" alt="user" />
             {user?.name }
           </InputGroup.Text>
@@ -225,7 +227,7 @@ function ThreadItem({ data = {} }) {
               placeholder="Add comment"
               type="text"
               name="content"
-              className="rounded-0"
+              className="rounded-md"
               value={comment.content}
               onChange={(e) => setComment({ [e.target.name]: e.target.value })}
               onKeyDown={(e) => {

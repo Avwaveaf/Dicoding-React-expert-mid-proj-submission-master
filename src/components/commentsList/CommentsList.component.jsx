@@ -3,11 +3,11 @@ import Accordion from 'react-bootstrap/Accordion';
 import PropTypes from 'prop-types';
 import CommentsItem from '../commentsItem/CommentsItem.component';
 
-function CommentsList({ comments = [], threadId }) {
+function CommentsList({ comments, threadId }) {
   return (
-    <Accordion id="comment-accordion">
+    <Accordion id="comments-accordion">
       <Accordion.Item eventKey="0">
-        <Accordion.Header className="text-secondary">
+        <Accordion.Header>
           { `Comments (${comments.length})`}
         </Accordion.Header>
         <Accordion.Body>
@@ -25,8 +25,11 @@ function CommentsList({ comments = [], threadId }) {
     </Accordion>
   );
 }
+CommentsList.defaultProps = {
+  comments: [],
+};
 CommentsList.propTypes = {
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.array,
   threadId: PropTypes.string.isRequired,
 
 };

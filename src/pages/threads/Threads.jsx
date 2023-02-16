@@ -9,6 +9,7 @@ import ThreadList from '../../components/ThreadList/ThreadList.component';
 import useRedirectLoggedOut from '../../customHooks/useRedirectLoggedOut';
 import { asyncGetLeaderboardsDataThunk } from '../../states/features/leaderboards/leaderboardSlice';
 import { asyncGetAllPost } from '../../states/features/threads/threadSlice';
+import ScrollToTopButton from '../../components/scrollToTopButton/ScrollToTopButton.component';
 
 function Threads() {
   useRedirectLoggedOut('/login');
@@ -59,6 +60,7 @@ function Threads() {
 
   return (
     <Row className="container-md gap-3 d-flex flex-column flex-md-row ">
+      <ScrollToTopButton />
       <Col>
         <LeaderboardsList leaderboards={leaderboards} />
       </Col>
