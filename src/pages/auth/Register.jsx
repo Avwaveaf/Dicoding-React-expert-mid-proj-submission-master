@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../../components/authForm/AuthForm.component';
+import AuthLayout from '../../components/authLayout/AuthLayout.component';
 import useFetchUserData from '../../customHooks/useFetchUserData';
 import { asyncRegisterUserThunk } from '../../states/features/user/userSlice';
 
@@ -29,14 +30,14 @@ function Register() {
   };
 
   return (
-    <div className="container-md  d-flex  flex-column justify-content-center align-items-center py-auto">
+    <AuthLayout>
       <AuthForm onSubmitHandler={registerHandler} initialData={initialData} />
 
       <Link to="/login">
         Already have an account?
       </Link>
 
-    </div>
+    </AuthLayout>
   );
 }
 

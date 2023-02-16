@@ -1,5 +1,11 @@
 * {
   transition: 0.2s all;
+  box-sizing: border-box;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -14,6 +20,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  overflow-y: scroll;
 }
 .accordion-button:not(.collapsed) {
   color: black !important;

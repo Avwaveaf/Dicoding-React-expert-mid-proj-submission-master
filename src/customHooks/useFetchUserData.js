@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,10 +8,7 @@ const useFetchUserData = (path) => {
   const token = localStorage.getItem('token');
   useEffect(() => {
     const fetchUserData = async () => {
-      if (user) {
-        toast.success(`Welcome back ${user.name}`);
-        navigate(path);
-      } else if (!user && token) {
+      if (!user && token) {
         navigate(path);
       }
     };

@@ -81,6 +81,7 @@ const userSlice = createSlice({
     .addCase(asyncLoginUserThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.message = payload;
+      localStorage.removeItem('token');
       toast.error(payload);
     })
     .addCase(asyncGetOwnProfileThunk.pending, (state) => {
@@ -94,8 +95,8 @@ const userSlice = createSlice({
     .addCase(asyncGetOwnProfileThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.isLoggedIn = false;
-
       state.message = payload;
+      localStorage.removeItem('token');
       toast.error(payload);
     }),
 });

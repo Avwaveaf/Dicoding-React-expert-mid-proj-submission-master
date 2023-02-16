@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 import AuthForm from '../../components/authForm/AuthForm.component';
+import AuthLayout from '../../components/authLayout/AuthLayout.component';
 import useFetchUserData from '../../customHooks/useFetchUserData';
 import { asyncLoginUserThunk } from '../../states/features/user/userSlice';
 
@@ -31,7 +33,17 @@ function Login() {
   };
 
   return (
-    <div className="container-md  d-flex  flex-column justify-content-center align-items-center py-auto">
+    <AuthLayout>
+      <h1>
+        <Typewriter
+          options={{
+            strings: ['Welcome to TalksDeed!', 'Please Login to continue... '],
+            autoStart: true,
+            loop: true,
+          }}
+        />
+      </h1>
+
       <AuthForm
         onSubmitHandler={loginHandler}
         initialData={initialData}
@@ -40,7 +52,7 @@ function Login() {
       <Link to="/register">
         Don&apos;t have an account?
       </Link>
-    </div>
+    </AuthLayout>
   );
 }
 

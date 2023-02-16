@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { GrFormViewHide, GrFormView } from 'react-icons/gr';
 
 function AuthForm({ onSubmitHandler, initialData, login = false }) {
   const [formData, setFormData] = useState(initialData);
+  const [pwdShow, setPwdShow] = useState(false);
   const onInputChangeHandler = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,38 +41,55 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={(e) => onInputChangeHandler(e)}
-          placeholder="Your Password"
-        />
+        <div className="d-flex align-items-center">
+          <Form.Control
+            type={pwdShow ? 'text' : 'password'}
+            name="password"
+            value={formData.password}
+            onChange={(e) => onInputChangeHandler(e)}
+            placeholder="Your Password"
+          />
+          <button
+            style={{
+              background: 'transparent',
+              outline: 'none',
+              border: 'none',
+            }}
+            type="button"
+            onClick={() => setPwdShow(!pwdShow)}
+          >
+            {pwdShow ? <GrFormViewHide size={30} /> : <GrFormView size={30} />}
+
+          </button>
+        </div>
+
       </Form.Group>
       <Form.Group className={`mb-3 ${login && 'd-none'}`} controlId="formBasicPassword2">
         <Form.Label>Confirm Password</Form.Label>
         <Form.Control
-          type="password"
+          type={pwdShow ? 'text' : 'password'}
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={(e) => onInputChangeHandler(e)}
           placeholder="Confirm Your Password"
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
+      <Form.Group className="mb-3" controlId="formBasicCheckbox" />
+      <Button variant="dark" type="submit">
         Submit
       </Button>
     </Form>
   );
 }
 
+AuthForm.defaultProps = {
+  login: false,
+};
+
 AuthForm.propTypes = {
   onSubmitHandler: PropTypes.func.isRequired,
   initialData: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  login: PropTypes.bool.isRequired,
+  login: PropTypes.bool,
 };
 
 export default AuthForm;

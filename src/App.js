@@ -6,7 +6,6 @@ import CustomLayout from './components/layout/Layout.component';
 import Loader from './components/loader/Loader.component';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
-import LandingPage from './pages/landingPage/LandingPage';
 import ThreadDetail from './pages/threadDetail/ThreadDetail';
 import Threads from './pages/threads/Threads';
 
@@ -19,7 +18,7 @@ function App() {
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={isLoggedIn ? <CustomLayout><Threads /></CustomLayout> : <Login />} />
           <Route path="/register" element={isLoggedIn ? <Threads /> : <Register />} />
           <Route path="/login" element={isLoggedIn ? <Threads /> : <Login />} />
           <Route path="/threads" element={<CustomLayout><Threads /></CustomLayout>} />

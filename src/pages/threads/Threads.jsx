@@ -58,7 +58,7 @@ function Threads() {
     : threads;
 
   return (
-    <Row className="container-md d-flex flex-column flex-md-row">
+    <Row className="container-md gap-3 d-flex flex-column flex-md-row">
       <Col>
         <LeaderboardsList leaderboards={leaderboards} />
       </Col>
@@ -70,9 +70,9 @@ function Threads() {
       }
 
       </Col>
-      <Col className="d-flex flex-column">
-        <p className="fs-3">Categories</p>
-        <div className="px-5 border rounded h-100 ">
+      <Col className="d-flex flex-column gap-1">
+        <p className="fs-4 p-0 m-0">Featured Categories</p>
+        <div className="px-2 border rounded" style={{ height: 'auto' }}>
 
           {categories?.map((category) => (
 

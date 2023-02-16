@@ -28,6 +28,7 @@ function CommentsList({ comments = [], threadId }) {
 CommentsList.propTypes = {
   comments: PropTypes.array.isRequired,
   threadId: PropTypes.string.isRequired,
+
 };
 
 export default CommentsList;
