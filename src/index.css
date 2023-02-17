@@ -70,6 +70,9 @@ code {
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
   color: white;
 }
+.card-body {
+  padding: var(--bs-card-spacer-y) 25px !important;
+}
 .accordion-button:not(.collapsed),
 .accordion-button {
   background-color: hsla(0, 0%, 100%, 0.4) !important;
@@ -109,8 +112,16 @@ code {
   text-align: center !important;
   padding: 10px 20px !important;
 }
-.input-group {
-  border-radius: 50px !important;
+.form-control {
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+}
+.input-group:not(.has-validation)
+  > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(
+    .form-floating
+  ) {
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
 }
 .accordion-item {
   border: none !important;
