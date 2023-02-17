@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
@@ -20,14 +21,19 @@ function Register() {
   const navigate = useNavigate();
   const registerHandler = async (e, formData) => {
     e.preventDefault();
-    const { name, email, password } = formData;
+    const {
+      name, email, password, confirmPassword,
+    } = formData;
+    if (password !== confirmPassword) {
+      return toast.error('Your password not match');
+    }
     const userData = {
       name,
       email,
       password,
     };
     await dispatch(asyncRegisterUserThunk(userData));
-    navigate('/login');
+    return navigate('/login');
   };
 
   return (

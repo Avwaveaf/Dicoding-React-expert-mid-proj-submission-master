@@ -1,6 +1,5 @@
 import React from 'react';
 import { PropagateLoader } from 'react-spinners';
-import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const override = {
   display: 'block',
