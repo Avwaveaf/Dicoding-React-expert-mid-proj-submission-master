@@ -13,7 +13,6 @@ export const asyncToggleUpVoteComment = createAsyncThunk(
 
     // check if user already liked the comment. if does neutralize the comment upcvotes
     if (currComment.upVotesBy.includes(userId)) {
-      console.log('userId found in like comment ');
       const updatedUpVotesBy = currComment.upVotesBy.filter((user) => user !== userId);
       const updatedComment = {
         ...currComment,
@@ -59,7 +58,6 @@ export const asyncToggleUpVoteComment = createAsyncThunk(
 
     // check if user already disliked the comment. if does neutralize the comment downVotes
     if (currComment.downVotesBy.includes(userId)) {
-      console.log('userId found in dislike comment ');
       const updatedDownVotesBy = currComment.downVotesBy.filter((user) => user !== userId);
       const updatedComment = {
         ...currComment,
