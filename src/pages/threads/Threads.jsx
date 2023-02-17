@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CreateThreadModal from '../../components/createThreadModal/CreateThreadModal.component';
@@ -25,13 +25,17 @@ function Threads() {
     const getAllPost = async () => {
       await dispatch(asyncGetAllPost());
     };
-    getAllPost();
+    if (threads.length === 0) {
+      getAllPost();
+    }
   }, []);
   useEffect(() => {
     const getLeaderBoards = async () => {
       await dispatch(asyncGetLeaderboardsDataThunk());
     };
-    getLeaderBoards();
+    if (leaderboards.length === 0) {
+      getLeaderBoards();
+    }
   }, []);
   const categories = useMemo(() => {
     const newCategories = threads.reduce((arr, thread) => {
@@ -73,30 +77,28 @@ function Threads() {
 
       </Col>
       <Col className="d-flex flex-column gap-1">
-        <p className="fs-4 p-0 m-0 text-light">Featured Categories</p>
-        <div className="px-2 border rounded" style={{ height: 'auto' }}>
-
-          {categories?.map((category) => (
-
-            <button
-              key={category}
-              type="button"
-              onClick={() => handleCategoryClick(category)}
-              style={{
-                background: selectedCategory === category ? 'rgb(33,37,41)' : 'white',
-                color: selectedCategory === category ? 'white' : 'black',
-                border: '1px solid black',
-                borderRadius: '5px',
-                padding: '10px',
-                margin: '5px',
-              }}
-            >
-              {category}
-            </button>
-
-          )) }
-
-        </div>
+        <p className="fs-4 p-0 m-0 text-light align-self-center">Featured Categories</p>
+        <Card className="p-3" style={{ height: 'auto' }}>
+          <div>
+            {categories?.map((category) => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => handleCategoryClick(category)}
+                style={{
+                  background: selectedCategory === category ? 'rgb(33,37,41)' : 'hsla(0, 0%, 100%, 0.4)',
+                  color: 'white',
+                  border: '1px solid white',
+                  borderRadius: '15px',
+                  padding: '10px',
+                  margin: '5px',
+                }}
+              >
+                {category}
+              </button>
+            )) }
+          </div>
+        </Card>
       </Col>
     </Row>
   );

@@ -22,7 +22,7 @@ function App() {
           <Route path="/register" element={isLoggedIn ? <Threads /> : <Register />} />
           <Route path="/login" element={isLoggedIn ? <Threads /> : <Login />} />
           <Route path="/threads" element={<CustomLayout><Threads /></CustomLayout>} />
-          <Route path="/threads/:threadId" element={<ThreadDetail />} />
+          <Route path="/threads/:threadId" element={<CustomLayout><ThreadDetail /></CustomLayout>} />
         </Routes>
       </BrowserRouter>
     </>

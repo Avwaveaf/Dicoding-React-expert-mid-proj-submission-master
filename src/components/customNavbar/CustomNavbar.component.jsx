@@ -40,13 +40,6 @@ function CustomNavbar() {
               title={navDropdownTitle}
               id="collasible-nav-dropdown"
             >
-              <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Account
-              </NavDropdown.Item>
-
-              <NavDropdown.Divider />
-
               <Navbar.Text>
                 <div className="d-flex flex-column justify-content-start px-3 py-2 align-items-center gap-2">
 

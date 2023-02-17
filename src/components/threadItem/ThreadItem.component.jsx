@@ -10,6 +10,7 @@ import Badge from 'react-bootstrap/Badge';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import formatDate from '../../utils/formatDate';
 import CommentsList from '../commentsList/CommentsList.component';
 import { asyncCreateCommentThunk } from '../../states/features/threads/threadSlice';
@@ -28,11 +29,12 @@ const tooltip = (
 const contentTooltip = (
   <Tooltip id="tooltip">
     Click to&nbsp;
-    <strong>See details</strong>
+    <strong>See more</strong>
   </Tooltip>
 );
 
-function ThreadItem({ data = {} }) {
+function ThreadItem({ data }) {
+  console.log(data);
   const {
     id,
     title,
@@ -118,7 +120,7 @@ function ThreadItem({ data = {} }) {
                 voted={voted}
               />
             </div>
-            <Card.Title>{title}</Card.Title>
+            <Card.Title><Link to={`/threads/${id}`} className="text-dark">{title}</Link></Card.Title>
             <div className="d-flex justify-content-between">
               <span className="text-muted" style={{ fontSize: '12px' }}>{formatDate(createdAt)}</span>
               <Badge bg="dark" style={{ width: 'fit-content' }}>
@@ -192,7 +194,7 @@ function ThreadItem({ data = {} }) {
 
       </Card.Header>
       <Card.Body style={{ boxShadow: 'inset 0px -100px 100px -100px rgba(0,0,0,0.75)' }}>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title><Link to={`/threads/${id}`} className="text-light">{title}</Link></Card.Title>
         <div className="d-flex px-3 justify-content-between">
           <span className="text-muted" style={{ fontSize: '12px' }}>{formatDate(createdAt)}</span>
           <Badge bg="dark" style={{ width: 'fit-content' }}>
@@ -247,6 +249,7 @@ function ThreadItem({ data = {} }) {
 
   );
 }
+
 ThreadItem.propTypes = {
   data: PropTypes.object.isRequired,
 };

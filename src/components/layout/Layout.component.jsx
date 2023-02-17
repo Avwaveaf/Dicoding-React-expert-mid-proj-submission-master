@@ -7,7 +7,7 @@ function CustomLayout({ children }) {
   return (
     <>
       <CustomNavbar />
-      <Container className="py-5 mt-5">
+      <Container className="py-5 mt-5" style={{ maxHeight: 'fit-content', minHeight: '100vh' }}>
         {children}
       </Container>
     </>

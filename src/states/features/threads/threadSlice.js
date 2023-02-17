@@ -122,11 +122,13 @@ const threadSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(asyncGetThreadDetailThunk.fulfilled, (state, { payload }) => {
+      const { id } = payload.data.detailThread;
       state.isLoading = false;
       state.isError = false;
       state.message = payload.message;
-      state.thread = payload.data.detailThread;
-      toast.success(payload.message);
+      const threadIndex = state.threads.findIndex((thread) => thread.id === id);
+      console.log(threadIndex);
+      state.thread = state.threads[threadIndex];
     })
     .addCase(asyncGetThreadDetailThunk.rejected, (state, { payload }) => {
       state.isLoading = false;

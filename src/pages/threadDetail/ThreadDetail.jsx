@@ -1,55 +1,48 @@
-import DOMPurify from 'dompurify';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import parseHTML from 'html-react-parser';
+import { Link, useParams } from 'react-router-dom';
+import Col from 'react-bootstrap/Col';
 import useRedirectLoggedOut from '../../customHooks/useRedirectLoggedOut';
-import { asyncGetThreadDetailThunk } from '../../states/features/threads/threadSlice';
-import formatDate from '../../utils/formatDate';
-import CommentsList from '../../components/commentsList/CommentsList.component';
+import { asyncGetAllPost, asyncGetThreadDetailThunk } from '../../states/features/threads/threadSlice';
+import ThreadItem from '../../components/threadItem/ThreadItem.component';
 
 function ThreadDetail() {
   useRedirectLoggedOut('/login');
   const { threadId } = useParams();
   const dispatch = useDispatch();
-  const { thread, isLoading, isError } = useSelector((state) => state.threads);
+  const {
+    thread, isLoading, isError, threads,
+  } = useSelector((state) => state.threads);
 
   useEffect(() => {
     const getThreadDetail = async () => {
       await dispatch(asyncGetThreadDetailThunk(threadId));
     };
-    getThreadDetail();
-  }, [dispatch, threadId]);
+    const getAllPost = async () => {
+      if (threads.length === 0) {
+        await dispatch(asyncGetAllPost());
+      } else {
+        getThreadDetail();
+      }
+    };
+    getAllPost();
+  }, [dispatch, threadId, threads]);
+
+  const memoizedThread = useMemo(() => thread, [thread]);
+  const memoizedIsLoading = useMemo(() => isLoading, [isLoading]);
 
   if (isError) {
     return <p>Thread not found</p>;
   }
 
-  if (!isLoading && thread) {
+  if (!memoizedIsLoading && memoizedThread) {
     return (
-      <div className="container-md flex justify-content-center align-items-center">
-        <h1>{thread.title}</h1>
-        <h4>{thread.category}</h4>
-        <span>
-          created By:
-          {' '}
-          {thread.owner.name}
-        </span>
-        <span>
-          created at:
-          {' '}
-          {formatDate(thread.createdAt)}
-        </span>
-        <div className="p-3">
-          {parseHTML(DOMPurify.sanitize(thread.body))}
-        </div>
-        <div />
-        <hr />
-        <div>
-          <CommentsList comments={thread.comments} threadId={thread.id} />
-        </div>
 
-      </div>
+      <Col md={6} className="mx-auto d-flex flex-column gap-3">
+        <ThreadItem data={memoizedThread} />
+        <Link to="/threads" className="text-light align-self-end">Back to homepage</Link>
+      </Col>
+
     );
   }
 }
