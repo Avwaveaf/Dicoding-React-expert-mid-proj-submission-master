@@ -127,7 +127,6 @@ const threadSlice = createSlice({
       state.isError = false;
       state.message = payload.message;
       const threadIndex = state.threads.findIndex((thread) => thread.id === id);
-      console.log(threadIndex);
       state.thread = state.threads[threadIndex];
     })
     .addCase(asyncGetThreadDetailThunk.rejected, (state, { payload }) => {

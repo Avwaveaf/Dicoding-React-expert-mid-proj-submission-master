@@ -34,7 +34,6 @@ const contentTooltip = (
 );
 
 function ThreadItem({ data }) {
-  console.log(data);
   const {
     id,
     title,

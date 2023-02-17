@@ -15,7 +15,7 @@
     "linebreak-style": "off",
     "no-alert": "off",
     "no-param-reassign": "off",
-    "no-console": "off",
+    "no-console": "warn",
     "react/forbid-prop-types": "off",
     "import/no-extraneous-dependencies": "off",
     "no-underscore-dangle": "off",
