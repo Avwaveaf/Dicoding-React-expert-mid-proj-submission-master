@@ -24,9 +24,7 @@ const leaderboardSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(asyncGetLeaderboardsDataThunk.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
       state.leaderboards = payload.data.leaderboards;
-      state.message = payload.message;
     })
     .addCase(asyncGetLeaderboardsDataThunk.rejected, (state, { payload }) => {
       state.isLoading = true;
