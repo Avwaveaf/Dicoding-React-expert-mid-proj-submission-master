@@ -24,12 +24,12 @@ const leaderboardSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(asyncGetLeaderboardsDataThunk.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoading = true;
       state.leaderboards = payload.data.leaderboards;
       state.message = payload.message;
     })
     .addCase(asyncGetLeaderboardsDataThunk.rejected, (state, { payload }) => {
-      state.isLoading = true;
+      state.isLoading = false;
       state.message = payload;
       toast.error(payload);
     }),
