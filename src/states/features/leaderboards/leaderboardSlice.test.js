@@ -33,7 +33,9 @@ describe('leaderboardSlice reducer', () => {
     GetLeaderboardsData.mockResolvedValueOnce(leaderboardsData);
 
     await store.dispatch(asyncGetLeaderboardsDataThunk());
+
     const actions = store.getActions();
+
     const expectedPayload = {
       data: {
         leaderboards: leaderboardsData.data.leaderboards,
