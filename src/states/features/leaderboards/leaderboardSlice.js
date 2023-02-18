@@ -11,7 +11,7 @@ export const asyncGetLeaderboardsDataThunk = createAsyncThunk(
     try {
       return await GetLeaderboardsData();
     } catch (error) {
-      return thunkAPI.rejectWithValue('hello world');
+      return thunkAPI.rejectWithValue(error.response.data.message || error.message);
     }
   },
 );
