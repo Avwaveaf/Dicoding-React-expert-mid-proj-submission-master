@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "cypress/globals": true
   },
   "extends": ["plugin:react/recommended", "airbnb", "react-app"],
   "overrides": [],
@@ -10,7 +11,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "cypress"],
   "rules": {
     "linebreak-style": "off",
     "no-alert": "off",
@@ -24,6 +25,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-empty-pattern": "off"
+    "no-empty-pattern": "off",
+    "prefer-promise-reject-errors": "off"
   }
 }
