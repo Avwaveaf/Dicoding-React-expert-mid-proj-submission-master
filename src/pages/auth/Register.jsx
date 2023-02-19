@@ -19,7 +19,7 @@ function Register() {
   useFetchUserData('/threads');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const registerHandler = async (e, formData) => {
+  const registerHandler = async (e, formData, setFormData) => {
     e.preventDefault();
     const {
       name, email, password, confirmPassword,
@@ -32,8 +32,11 @@ function Register() {
       email,
       password,
     };
-    await dispatch(asyncRegisterUserThunk(userData));
-    return navigate('/login');
+    const res = await dispatch(asyncRegisterUserThunk(userData));
+    if (!res.error) {
+      return navigate('/login');
+    }
+    return setFormData(initialData);
   };
 
   return (

@@ -11,7 +11,9 @@ export const asyncGetLeaderboardsDataThunk = createAsyncThunk(
     try {
       return await GetLeaderboardsData();
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message || error.message);
+      const message = error.response?.data?.message || error.message;
+      toast.error(message);
+      return thunkAPI.rejectWithValue(message);
     }
   },
 );
@@ -31,7 +33,6 @@ const leaderboardSlice = createSlice({
     .addCase(asyncGetLeaderboardsDataThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.message = payload;
-      toast.error(payload);
     }),
 });
 
