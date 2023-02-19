@@ -1,5 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { toast } from 'react-hot-toast';
 import {
   asyncGetLeaderboardsDataThunk,
 } from './leaderboardSlice';
@@ -10,7 +11,7 @@ jest.mock('../../../services/leaderboards');
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('leaderboardSlice reducer', () => {
+describe('leaderboardSlice thunk', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -59,6 +60,7 @@ describe('leaderboardSlice reducer', () => {
     const error = new Error('Unable to retrieve leaderboards');
     error.response = { data: { message: 'Failed to retrieve leaderboards' } };
     GetLeaderboardsData.mockRejectedValueOnce(error);
+    const toastSpy = jest.spyOn(toast, 'error');
 
     await store.dispatch(asyncGetLeaderboardsDataThunk());
     const actions = store.getActions();
@@ -68,5 +70,6 @@ describe('leaderboardSlice reducer', () => {
       asyncGetLeaderboardsDataThunk.rejected.type,
     );
     expect(actions[1].payload).toEqual(expectedPayload);
+    expect(toastSpy).toHaveBeenCalledWith(expectedPayload);
   });
 });

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
 import { GetOwnProfileHandler, LoginUserHandler, RegisterUserHandler } from '../../../services/auth';
 
-const initialState = {
+export const initialState = {
   user: null,
   isLoggedIn: false,
   isLoading: false,
@@ -26,17 +26,21 @@ export const asyncRegisterUserThunk = createAsyncThunk(
     try {
       return await RegisterUserHandler(formData);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message || error.message);
+      const message = error.response?.data?.message || error.message;
+      toast.error(message);
+      return thunkAPI.rejectWithValue(message);
     }
   },
 );
 export const asyncLoginUserThunk = createAsyncThunk(
   'auth/login',
-  async (formData, { rejectWithValue, dispatch }) => {
+  async (formData, { rejectWithValue }) => {
     try {
       return await LoginUserHandler(formData);
     } catch (error) {
-      return rejectWithValue(error.response.data.message || error.message);
+      const message = error.response?.data?.message || error.message;
+      toast.error(message);
+      return rejectWithValue(message);
     }
   },
 );
@@ -66,7 +70,6 @@ const userSlice = createSlice({
     .addCase(asyncRegisterUserThunk.rejected, (state, { payload }) => {
       state.isLoading = false;
       state.message = payload;
-      toast.error(payload);
     })
     .addCase(asyncLoginUserThunk.pending, (state) => {
       state.isLoading = true;
@@ -82,7 +85,6 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.message = payload;
       localStorage.removeItem('token');
-      toast.error(payload);
     })
     .addCase(asyncGetOwnProfileThunk.pending, (state) => {
       state.isLoading = true;
