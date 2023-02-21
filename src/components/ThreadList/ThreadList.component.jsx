@@ -4,7 +4,7 @@ import ThreadItem from '../threadItem/ThreadItem.component';
 
 function ThreadList({ threads = [] }) {
   return (
-    <div className="w-100 d-flex flex-column gap-5">
+    <div className="w-100 d-flex flex-column gap-5" data-testid="thread-list">
       {
         threads.map((thread) => (
           <ThreadItem

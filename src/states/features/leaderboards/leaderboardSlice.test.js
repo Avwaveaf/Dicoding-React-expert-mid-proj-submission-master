@@ -11,6 +11,14 @@ jest.mock('../../../services/leaderboards');
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+/**
+ * getLeaderboards thunk
+1.  ensures that the "asyncGetLeaderboardsDataThunk" function dispatches the expected actions
+    and payload when the asynchronous request is successful.
+2. ensures that the "asyncGetLeaderboardsDataThunk" function dispatches the expected actions
+     and payload when the asynchronous request is rejected.
+ */
+
 describe('leaderboardSlice thunk', () => {
   afterEach(() => {
     jest.clearAllMocks();

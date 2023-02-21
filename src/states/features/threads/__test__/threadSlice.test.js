@@ -1,5 +1,11 @@
 import reducer, { UPDATE_THREAD, UPDATE_COMMENT } from '../threadSlice';
 
+/**
+ * threads reducer
+1.  Update a thread correctly
+2. Update a comment correctly
+ */
+
 describe('reducer', () => {
   it('should update a thread correctly', () => {
     const initialState = {

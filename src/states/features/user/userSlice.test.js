@@ -16,6 +16,18 @@ jest.mock('../../../services/auth.js');
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+/**
+ * authSlice reducer
+1.  should handle SET_LOGIN and isLoggedIn should same as payload
+2. should handle SET_LOGOUT_USER and should set isLoggedIn to false and user to null
+3. should handle asyncGetOwnProfileThunk fulfilled
+4.should handle asyncGetOwnProfileThunk rejected
+5. should handle asyncRegisterUserThunk fulfilled and api calls should have proper formData
+6. should handle asyncRegisterUserThunk rejected and show the toast
+7. should handle asyncLoginUserThunk fulfilled and api calls should have proper formData
+8. should handle asyncLoginUserThunk rejected and show the toast
+ */
+
 describe('authSlice reducer', () => {
   it('should handle SET_LOGIN and isLoggedIn should same as payload', () => {
     const loginPayload = true;
