@@ -15,7 +15,7 @@ export const asyncGetOwnProfileThunk = createAsyncThunk(
     try {
       return await GetOwnProfileHandler();
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue('error');
     }
   },
 );
