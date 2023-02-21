@@ -6,6 +6,7 @@ import CustomLayout from './components/layout/Layout.component';
 import Loader from './components/loader/Loader.component';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import NotFound from './pages/NotFound/NotFound';
 import ThreadDetail from './pages/threadDetail/ThreadDetail';
 import Threads from './pages/threads/Threads';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={isLoggedIn ? <Threads /> : <Login />} />
           <Route path="/threads" element={<CustomLayout><Threads /></CustomLayout>} />
           <Route path="/threads/:threadId" element={<CustomLayout><ThreadDetail /></CustomLayout>} />
+          <Route path="/*" element={<CustomLayout><NotFound /></CustomLayout>} />
         </Routes>
       </BrowserRouter>
     </>
