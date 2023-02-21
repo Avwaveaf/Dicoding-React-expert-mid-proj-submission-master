@@ -79,7 +79,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
       <Form.Group className="mb-3" controlId="formBasicPassword2">
         <Form.Label className="text-light">Confirm Password</Form.Label>
         <Form.Control
-          type={pwdShow ? 'text' : 'password'}
+          type="password"
           name="confirmPassword"
           id="password-field"
           value={formData.confirmPassword}
