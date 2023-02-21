@@ -29,7 +29,8 @@
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
-    "ci:test": "react-scripts test --watchAll=false --transformIgnorePatterns \"node_modules/(?!axios)/\" && start-server-and-test start http-get://0.0.0.0:3000"
+    "e2e": "cypress run",
+    "ci:test": "react-scripts test --watchAll=false --transformIgnorePatterns \"node_modules/(?!axios)/\" && start-server-and-test start http-get://0.0.0.0:3000 e2e"
   },
   "eslintConfig": {
     "extends": [
