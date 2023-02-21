@@ -134,9 +134,9 @@ function ThreadItem({ data }) {
           <Col className="p-3 d-flex gap-3 flex-column justify-content-between">
             <div className="d-flex flex-column gap-3">
               <Card.Title>
-                {`Comments (${comments.length})` }
+                {`Comments (${comments?.length})` }
               </Card.Title>
-              {comments.length
+              {comments?.length
                 ? comments.map((item) => (
                   <CommentsItem
                     data={item}

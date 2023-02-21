@@ -18,14 +18,20 @@ function ThreadDetail() {
     const getThreadDetail = async () => {
       await dispatch(asyncGetThreadDetailThunk(threadId));
     };
-    const getAllPost = async () => {
-      if (threads.length === 0) {
-        await dispatch(asyncGetAllPost());
-      } else {
+
+    const getAllPostAndRetrieveThreadDetail = async () => {
+      await dispatch(asyncGetAllPost());
+      getThreadDetail();
+    };
+
+    if (threads.length === 0) {
+      getAllPostAndRetrieveThreadDetail();
+    } else if (threadId) {
+      const threadExists = threads.some((threadItem) => threadItem.id === threadId);
+      if (threadExists) {
         getThreadDetail();
       }
-    };
-    getAllPost();
+    }
   }, [dispatch, threadId, threads]);
 
   const memoizedThread = useMemo(() => thread, [thread]);

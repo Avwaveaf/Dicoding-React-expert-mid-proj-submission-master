@@ -31,7 +31,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
         )
       }
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3">
         <Form.Label className="text-light">Email address</Form.Label>
         <Form.Control
           type="email"
@@ -46,7 +46,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
         </Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3">
         <Form.Label className="text-light">Password</Form.Label>
         <div className="d-flex gap-2 align-items-center">
           <Form.Control
@@ -76,7 +76,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
       </Form.Group>
       { !login && (
-      <Form.Group className="mb-3" controlId="formBasicPassword2">
+      <Form.Group className="mb-3">
         <Form.Label className="text-light">Confirm Password</Form.Label>
         <Form.Control
           type={pwdShow ? 'text' : 'password'}
