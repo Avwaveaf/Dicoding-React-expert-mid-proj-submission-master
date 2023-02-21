@@ -29,12 +29,23 @@
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
-    "ci:test": "react-scripts test --watchAll=false --transformIgnorePatterns \"node_modules/(?!axios)/\" && start-server-and-test start http-get://0.0.0.0:3000"
+    "e2e": "cypress run",
+    "ci:test": "react-scripts test --watchAll=false --transformIgnorePatterns \"node_modules/(?!axios)/\" && start-server-and-test start http-get://0.0.0.0:3000 e2e"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -52,10 +63,21 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/node-logger": "^6.5.16",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "babel-jest": "^29.4.3",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "cypress": "^12.5.1",
     "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -64,7 +86,9 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.4",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.10",
     "redux-mock-store": "^1.5.4",
-    "start-server-and-test": "^1.15.4"
+    "start-server-and-test": "^1.15.4",
+    "webpack": "^5.75.0"
   }
 }
