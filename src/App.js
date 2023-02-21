@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       {(isLoading || authLoading) && <Loader /> }
-      <Toaster />
+      <Toaster id="toast" />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={isLoggedIn ? <CustomLayout><Threads /></CustomLayout> : <Login />} />

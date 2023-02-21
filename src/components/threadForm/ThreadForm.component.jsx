@@ -37,6 +37,7 @@ function ThreadForm({
               value={formData.title}
               onChange={(e) => onInputChangeHandler(e)}
               placeholder="Thread Title"
+              data-testid="title"
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -47,6 +48,7 @@ function ThreadForm({
               value={formData.category}
               onChange={(e) => onInputChangeHandler(e)}
               placeholder="Thread Category"
+              data-testid="category"
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -57,6 +59,7 @@ function ThreadForm({
               value={formData.body}
               onChange={(e) => onInputChangeHandler(e)}
               placeholder="Write something on your mind"
+              data-testid="body"
             />
           </Form.Group>
           <Button variant="dark" type="submit">

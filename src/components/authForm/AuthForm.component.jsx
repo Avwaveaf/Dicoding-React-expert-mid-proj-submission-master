@@ -14,23 +14,30 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
   return (
     <Form onSubmit={(e) => onSubmitHandler(e, formData, setFormData)}>
-      <Form.Group className={`mb-3 ${login && 'd-none'}`}>
-        <Form.Label className="text-light">Username</Form.Label>
-        <Form.Control
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={(e) => onInputChangeHandler(e)}
-          placeholder="Your Usernmame"
-        />
+      {
+        !login && (
+        <Form.Group className="mb-3">
+          <Form.Label className="text-light">Username</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            aria-label="name"
+            value={formData.name}
+            onChange={(e) => onInputChangeHandler(e)}
+            placeholder="Your Usernmame"
+          />
 
-      </Form.Group>
+        </Form.Group>
+        )
+      }
+
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label className="text-light">Email address</Form.Label>
         <Form.Control
           type="email"
           name="email"
           value={formData.email}
+          aria-label="email"
           onChange={(e) => onInputChangeHandler(e)}
           placeholder="Your Email Address"
         />
@@ -45,6 +52,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
           <Form.Control
             type={pwdShow ? 'text' : 'password'}
             name="password"
+            id="password-field"
             value={formData.password}
             onChange={(e) => onInputChangeHandler(e)}
             placeholder="Your Password"
@@ -58,6 +66,7 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
 
             }}
             type="button"
+            data-testid="toggle-password-button"
             onClick={() => setPwdShow(!pwdShow)}
           >
             {pwdShow ? <GrFormViewHide size={30} /> : <GrFormView size={30} />}
@@ -66,17 +75,20 @@ function AuthForm({ onSubmitHandler, initialData, login = false }) {
         </div>
 
       </Form.Group>
-      <Form.Group className={`mb-3 ${login && 'd-none'}`} controlId="formBasicPassword2">
+      { !login && (
+      <Form.Group className="mb-3" controlId="formBasicPassword2">
         <Form.Label className="text-light">Confirm Password</Form.Label>
         <Form.Control
           type={pwdShow ? 'text' : 'password'}
           name="confirmPassword"
+          id="password-field"
           value={formData.confirmPassword}
           onChange={(e) => onInputChangeHandler(e)}
           placeholder="Confirm Your Password"
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox" />
+      )}
+
       <Button variant="dark" type="submit">
         Submit
       </Button>

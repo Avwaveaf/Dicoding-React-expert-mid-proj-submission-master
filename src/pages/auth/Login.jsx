@@ -21,16 +21,16 @@ function Login() {
   const loginHandler = async (e, formData, setFormData) => {
     e.preventDefault();
 
-    const { name, email, password } = formData;
+    const { email, password } = formData;
     const userData = {
-      name,
       email,
       password,
     };
-    await dispatch(asyncLoginUserThunk(userData));
+    const res = await dispatch(asyncLoginUserThunk(userData));
     setFormData(initialData);
-
-    navigate('/threads');
+    if (!res.error) {
+      navigate('/threads');
+    }
   };
 
   return (

@@ -79,7 +79,7 @@ function Threads() {
       <Col className="d-flex flex-column gap-1">
         <p className="fs-4 p-0 m-0 text-light align-self-center">Featured Categories</p>
         <Card className="p-3" style={{ height: 'auto' }}>
-          <div>
+          <div data-testid="featured-categories">
             {categories?.map((category) => (
               <button
                 key={category}
