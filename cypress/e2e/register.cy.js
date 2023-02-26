@@ -58,7 +58,7 @@ describe('Register spec', () => {
     cy.get('input[placeholder="Your Usernmame"]').type('sampleuser23456');
     cy.get('input[placeholder="Your Email Address"]').type('tes3s212faaaffxxfsdase1221@gmail.com');
     cy.get('input[placeholder="Your Password"]').type('12345678');
-    cy.get('input[placeholder="Confirm Your Password"]').type('12345678');
+    cy.get('input[placeholder="Confirm Your Password"]').type('123456789');
     cy.get('button').contains(/^Submit$/).click();
     cy.url().should('include', '/login');
   });
